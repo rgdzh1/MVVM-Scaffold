@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="network_connection_failed">链接失败</string>
+    <string name="network_request_timeout">请求超时</string>
+    <string name="api_data_parse_error">数据解析错误</string>
+    <string name="internet_connection_failed">Internet connection failed.</string>
+    <string name="click_me_to_retry">Click me to retry!</string>
+    <string name="data_does_not_exist">Data does not exist</string>
+    <string name="please_contact_customer_service">Please contact customer service</string>
+</resources>

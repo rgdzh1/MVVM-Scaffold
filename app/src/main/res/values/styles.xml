@@ -1,0 +1,57 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <!--dialog进入页面动画样式-->
+    <style name="style_slid_anim" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_out</item>
+    </style>
+    <!--dialog style-->
+    <style name="style_dialog" parent="android:Theme.Dialog">
+        <!-- 设置边框，@null没有边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- 是否覆盖窗口的内容  @null:不覆盖内容-->
+        <item name="android:windowContentOverlay">@null</item>
+        <!-- 设置dialog的执行动画，@null：不设置动画 -->
+        <item name="android:windowAnimationStyle">@style/style_slid_anim</item>
+        <!-- 是否去除标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 设置触摸空白处是否会消失  false:不会 -->
+        <item name="android:windowCloseOnTouchOutside">false</item>
+        <!--弹窗居中-->
+        <item name="android:layout_gravity">center</item>
+        <item name="android:screenSize">large</item>
+    </style>
+    <!--透明背景Dialog-->
+    <style name="style_transparent_dialog" parent="style_dialog">
+        <!-- 设置背景颜色 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 是否设置阴影 -->
+        <item name="android:backgroundDimEnabled">false</item>
+        <!-- 是否设置半透明的阴影效果 -->
+        <item name="android:windowIsTranslucent">false</item>
+    </style>
+    <!--阴影Dialog-->
+    <style name="style_shadow_dialog" parent="style_dialog">
+        <!-- 设置背景颜色 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 是否设置阴影 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 是否设置半透明的阴影效果 -->
+        <item name="android:windowIsTranslucent">false</item>
+    </style>
+    <!--半透明Dialog-->
+    <style name="style_translucent_dialog" parent="style_dialog">
+        <!-- 设置背景颜色 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 是否设置阴影 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 是否设置半透明的阴影效果 -->
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+</resources>
