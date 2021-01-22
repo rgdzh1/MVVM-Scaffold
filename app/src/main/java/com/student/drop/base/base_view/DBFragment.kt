@@ -1,5 +1,5 @@
-package com.student.drop.base.base_view
 
+package com.student.drop.base.base_view
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.student.drop.R
+import com.student.drop.util.DialogUtil
 import com.tbruyelle.rxpermissions3.RxPermissions
 
 
@@ -23,7 +24,7 @@ abstract class DBFragment<T : ViewDataBinding> : Fragment() {
 
     // 动画加载弹窗
     val mLoadingDULy = lazy {
-        com.student.drop.util.DialogUtil
+        DialogUtil
             .Builder(context, R.layout.dialog_loading)
             .setTransparentStyle()
             .build()
@@ -34,17 +35,17 @@ abstract class DBFragment<T : ViewDataBinding> : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mBinding = DataBindingUtil.inflate<T>(inflater, layoutId(), container, false)
+        mBinding = DataBindingUtil.inflate(inflater, layoutId(), container, false)
         mBinding.lifecycleOwner = this@DBFragment
         return mBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         startObserve()
         initView()
         initListener()
         initData()
-        super.onViewCreated(view, savedInstanceState)
     }
 
 

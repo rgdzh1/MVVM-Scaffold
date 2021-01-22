@@ -30,6 +30,7 @@ abstract class BVMFragment<T : ViewDataBinding, E : BViewModel> : DBFragment<T>(
         return mLoadSir.value.loadLayout
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // 加载界面监听

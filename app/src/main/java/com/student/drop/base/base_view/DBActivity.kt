@@ -1,13 +1,12 @@
 package com.student.drop.base.base_view
 
-import android.content.res.Resources
 import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import com.blankj.utilcode.util.AdaptScreenUtils
 import com.student.drop.R
+import com.student.drop.util.DialogUtil
 import com.tbruyelle.rxpermissions3.RxPermissions
 
 
@@ -21,7 +20,7 @@ abstract class DBActivity<T : ViewDataBinding> : AppCompatActivity() {
 
     // 动画加载弹窗
     val mLoadingDULy = lazy {
-        com.student.drop.util.DialogUtil
+        DialogUtil
             .Builder(this, R.layout.dialog_loading)
             .setTransparentStyle()
             .build()
@@ -32,10 +31,13 @@ abstract class DBActivity<T : ViewDataBinding> : AppCompatActivity() {
         // 加载布局
         mBinding = DataBindingUtil.setContentView(this, layoutId())
         mBinding.lifecycleOwner = this@DBActivity
+        // 状态栏颜色
+//        StatusBarUtil.setColor(this, Color.BLACK)
         startObserve()
         initView()
         initListener()
         initData()
+
     }
 
     /**

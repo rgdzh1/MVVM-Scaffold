@@ -1,4 +1,4 @@
-package com.student.drop.base.base_vm
+ package com.student.drop.base.base_vm
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -9,6 +9,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 open class BViewModel(var mBRepo: BRepo) : AndroidViewModel(VCashApp.CONTEXT as Application) {
+    val mApplication = getApplication<Application>()
 
     /**
      * viewModelScope默认运行在UI线程中

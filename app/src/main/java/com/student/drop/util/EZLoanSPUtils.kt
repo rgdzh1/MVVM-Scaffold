@@ -2,7 +2,7 @@ package com.student.drop.util
 
 import com.tencent.mmkv.MMKV
 
-object VCashSPUtils {
+object EZLoanSPUtils {
     private var kv: MMKV = MMKV.defaultMMKV()
     fun encodeBool(k: String, v: Boolean) {
         kv.encode(k, v)

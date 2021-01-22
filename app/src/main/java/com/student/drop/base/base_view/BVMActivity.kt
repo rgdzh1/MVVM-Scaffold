@@ -8,9 +8,10 @@ import com.student.drop.base.base_vm.BViewModel
 
 
 abstract class BVMActivity<T : ViewDataBinding, E : BViewModel> : DBActivity<T>() {
+
     // 获取LoadSir对象
     private var mLoadSir = lazy {
-        LoadSir.getDefault().register(this){
+        LoadSir.getDefault().register(this) {
             // 错误点击回调
             onReloadListener(it)
         }

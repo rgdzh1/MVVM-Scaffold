@@ -1,3 +1,5 @@
+package com.student.drop.api
+
 import com.blankj.utilcode.util.LogUtils
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache
@@ -5,6 +7,7 @@ import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersisto
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.jkt.tnetprogress.*
 import com.student.drop.VCashApp
+import com.student.drop.bean.MyProgressInfo
 import okhttp3.OkHttpClient
 
 /**
@@ -12,7 +15,7 @@ import okhttp3.OkHttpClient
  */
 object ProgressRetrofitClient : BRetrofitClient() {
     val mBApi by lazy {
-        getApi(VApi::class.java, VApi.B_URL)
+        getApi(EZLoanApiService::class.java, EZLoanApiService.B_URL)
     }
 
     /**
@@ -32,7 +35,7 @@ object ProgressRetrofitClient : BRetrofitClient() {
                 // 上传进度监听
                 val progress = (100.0 * info!!.currentLength / info.contentLength).toInt()
                 LiveEventBus.get("VCashApp-CircleProgressBar")
-                    .post(com.student.drop.bean.ProgressInfo(progress, 1))
+                    .post(MyProgressInfo(progress, 1))
                 if (BuildConfig.DEBUG) {
                     LogUtils.e("上传进度", progress)
                 }
@@ -46,7 +49,7 @@ object ProgressRetrofitClient : BRetrofitClient() {
                 // 下载进度监听
                 val progress = (100.0 * info!!.currentLength / info.contentLength).toInt()
                 LiveEventBus.get("VCashApp-CircleProgressBar")
-                    .post(com.student.drop.bean.ProgressInfo(progress, 2))
+                    .post(MyProgressInfo(progress, 2))
                 if (BuildConfig.DEBUG) {
                     LogUtils.e("下载进度", progress)
                 }

@@ -1,3 +1,5 @@
+package com.student.drop.api
+
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
@@ -6,7 +8,7 @@ import okhttp3.OkHttpClient
 
 object DefauleRetrofitClient : BRetrofitClient() {
     val mBApi by lazy {
-        getApi(VApi::class.java, VApi.B_URL)
+        getApi(EZLoanApiService::class.java, EZLoanApiService.B_URL)
     }
 
     override fun myConfig(mBuilder: OkHttpClient.Builder) {

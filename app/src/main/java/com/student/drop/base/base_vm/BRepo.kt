@@ -5,12 +5,13 @@ import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.google.gson.JsonParseException
 import com.student.drop.BuildConfig
+import com.student.drop.R
 import com.student.drop.VCashApp
 import com.student.drop.bean.BResponse
+
 import com.student.drop.bean.VCashPageState
 import java.net.ConnectException
 import java.net.SocketTimeoutException
-import com.student.drop.R
 
 
 open class BRepo {
@@ -63,8 +64,8 @@ open class BRepo {
      */
     suspend fun <F : Any> handleResponse(
         response: BResponse<F>,
-        data200Block: suspend (f: F?) -> Unit = {},
-        dataSuccessBlock: suspend (f: F?) -> Unit = {},
+        data200Block: suspend (f: F) -> Unit = {},
+        dataSuccessBlock: suspend (f: F) -> Unit = {},
         dataErrorBlock: suspend () -> Unit = {},
         handleDataSuccess: Boolean = true,
         handleDataErr: Boolean = true
@@ -75,13 +76,17 @@ open class BRepo {
                 mPageStateMLD.postValue(VCashPageState(isSuccess = true))
             }
             // 数据获取成功的回调
-            dataSuccessBlock(response.data)
+            response.data?.apply {
+                dataSuccessBlock(this)
+            }
             if (response.code == "200") {
                 // code为200的回调
-                data200Block(response.data)
+                response.data?.apply {
+                    data200Block(this)
+                }
             } else {
                 // code非200,就show出Toast
-                ToastUtils.showLong(response.message)
+                ToastUtils.showLong(response.msg)
             }
         } else {
             // 有异常
@@ -109,6 +114,7 @@ open class BRepo {
             }
             // 数据获取错误的回调
             dataErrorBlock()
+            mPageStateMLD.postValue(VCashPageState(isDialogLoding = false))
         }
     }
 }
