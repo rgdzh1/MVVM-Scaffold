@@ -1,67 +1,78 @@
+package com.student.drop.api
+
 import com.student.drop.BuildConfig
 
-interface VApi {
+
+
+interface ApiService {
     companion object {
         const val B_URL = BuildConfig.LGY_URL
 
-//        // 登录
-//        const val LOGIN = "api/user/login"
-//
-//        //获取验证码
-//        const val GET_CAPTCHA = "api/user/captcha/vcode";
-//
-//        // 检测验证码
-//        const val CHECK_CAPTCHA = "api/user/captcha/check";
-//
-//        // 注册 或者检查号码注册状态
-//        const val REGISTER = "api/user/register2";
-//
-//        // 注册 第四步
-//        const val REGISTER_COMEPLETE = "api/user/completeregister";
-//
-//        // 检测当前用户贷款状态
-//        const val CHECK_USER_LOAN_STATUS = "v1/order/user/{userId}"
-//
-//        // 获取当前用户可以使用的贷款产品
-//        const val USER_LOANS_PRODUCTS = "v1/order/preapply"
-//
-//        // 通过订单id,获取订单详细数据
-//        const val ORDER_DETAILD = "v1/order/{orderId}"
-//
-//        // 获取协议以及文档接口
-//        const val GET_DOCUMENT_URL = "api/user/files/loan/url";
-//
-//        // 获取个人信息
-//        const val GET_PERSONAL_INFO = "api/user/info/personal";
-//
-//        // 上传文件,照片等
-//        const val UPLOAD_FILE = "v1/file/upload"
-//
-//        // 获取地址明细
-//        const val ADDRESS = "api/area/list.json?lastUpdate=05-01-2020%2000:00:00"
-//
-//        // 联系人信息
-//        const val CONTACT_INFO = "api/user/info/contact"
-//
-//        // 用户通讯录zip上传
-//        const val UPLOAD_CONTACT_LIST = "api/user/phone/upload"
-//
-//        // 获取Employment 信息
-//        const val EMPLOYMENT_INFO = "api/user/info/employ"
-//
-//        // 贷款用途列表
-//        const val LOAN_PURPOSE = "v1/system/dictionary/loanPurpose"
-//
-//        // 提交订单
-//        const val SUBMIT_ORDER = "v1/order/apply"
+        // 检测手机号是否注册
+        const val CHECK_PHONE_EXIST = "/api/v1/checkPhone"
+
+        // 注册发送短信
+        const val SEND_CODE_REGISTER = "/api/v1/sendRegSms"
+
+        // 注册
+        const val REGISTER = "/api/v1/reg"
+
+        // 登录
+        const val LOGIN = "/api/v1/login"
+
+        // 修改密码发送短信
+        const val SEND_CODE_CHANGE_PWD = "/api/v1/sendEditPassSms"
+
+        // 修改密码
+        const val CHANGE_PWD = "/api/v1/editPass"
+
+        // 获取认证时候需要的一些教育程度,婚姻状况等描述信息
+        const val AUTH_HELP_INFO = "/api/v1/getChoice"
+
+        // 获取OSS TOKEN
+        const val OSS_TOKEN = "/api/v1/getOssAccessKey"
+
+        // 上传文件名到服务器
+        const val UPLOAD_FILE_NAME_SERVER = "/api/v1/getCardInfo"
+
+        // 上传KYC信息
+        const val UPLOAD_KYC_INFO = "/api/v1/saveUserFace"
+
+        // 上传所有数据信息
+        const val UPLOAD_Auth_ALL_INFO = "/api/v1/saveUserInfo"
+
+        // APPList上传
+        const val APPLIST_UPLOAD = "/api/v1/saveAppList"
+
+        // 联系人列表上传
+        const val CONTACT_LIST_UPLOAD = "/api/v1/savePhoneList"
+
+        // 活体认证密钥
+        const val GET_LIVENESS_LICENSE = "/api/v1/getLivensLicense"
+
+        // 活体检测图片上传到服务器中
+        const val UPLOAD_IMGE_LIVENESS = "/api/v1/saveUserImg"
+
+        // 取款中心选择
+        const val GET_LOAN_CENTER = "/api/v1/getProductInfo"
+
+        // 获取银行卡列表
+        const val GET_BANK_LIST = "/api/v1/getBankList"
+
+        // 选择银行卡
+        const val SELECT_BANK = "/api/v1/saveBankInfo"
+
+        // IFSC CODE查询
+        const val IFSC_CODE_QUERY = "/api/v1/getBankOutlets"
     }
 
-//    // 登录
+
+
 //    @POST(LOGIN)
 //    suspend fun login(
 //        @Body loginData: LoginData
 //    ): BaseResponse<LoginResult>
-//
+
 //    // 检测是否登录以及获取验证码
 //    @FormUrlEncoded
 //    @POST(GET_CAPTCHA)
@@ -69,7 +80,7 @@ interface VApi {
 //        @Field("phone") phone: String,
 //        @Field("type") type: String
 //    ): BaseResponse<CaptchaResult>
-//
+
 //    @FormUrlEncoded
 //    @POST(CHECK_CAPTCHA)
 //    suspend fun checkCaptcha(

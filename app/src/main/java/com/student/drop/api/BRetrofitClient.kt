@@ -32,7 +32,7 @@ abstract class BRetrofitClient {
                     // 添加公共参数
                     val original: Request = it.request()
                     val request = original.newBuilder()
-                        .header("token", EZLoanSPUtils.decodeString(EZKEY.TOKEN))
+                        .header("token", EZLoanSPUtils.decodeString(MYKEY.TOKEN))
                         .build()
                     it.proceed(request)
                 }

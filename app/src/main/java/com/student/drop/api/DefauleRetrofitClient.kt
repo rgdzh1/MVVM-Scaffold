@@ -8,7 +8,7 @@ import okhttp3.OkHttpClient
 
 object DefauleRetrofitClient : BRetrofitClient() {
     val mBApi by lazy {
-        getApi(EZLoanApiService::class.java, EZLoanApiService.B_URL)
+        getApi(ApiService::class.java, ApiService.B_URL)
     }
 
     override fun myConfig(mBuilder: OkHttpClient.Builder) {

@@ -15,7 +15,7 @@ import okhttp3.OkHttpClient
  */
 object ProgressRetrofitClient : BRetrofitClient() {
     val mBApi by lazy {
-        getApi(EZLoanApiService::class.java, EZLoanApiService.B_URL)
+        getApi(ApiService::class.java, ApiService.B_URL)
     }
 
     /**
