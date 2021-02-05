@@ -128,5 +128,7 @@ dependencies {
 
     // Kotlin 反射
     implementation "org.jetbrains.kotlin:kotlin-reflect:1.4.20"
+    // 解析网页
+    implementation 'org.jsoup:jsoup:1.13.1'
 
 }
