@@ -23,31 +23,12 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/et_cookies"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:hint="请输入Cookies"
-            android:textSize="16sp" />
-
-        <EditText
-            android:id="@+id/et_count"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:hint="请输入查询次数"
-            android:inputType="number"
-            android:text="10"
-            android:textSize="16sp" />
-
         <Button
             android:id="@+id/btn_start"
             android:layout_width="wrap_content"
             android:layout_height="42dp"
             android:layout_gravity="center"
+            android:layout_marginTop="50dp"
             android:background="@color/colorPrimary"
             android:text="Start"
             android:textAllCaps="false"

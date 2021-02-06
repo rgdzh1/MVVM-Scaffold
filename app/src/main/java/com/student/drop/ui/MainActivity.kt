@@ -3,6 +3,7 @@ package com.student.drop.ui
 import com.blankj.utilcode.util.ToastUtils
 import com.student.drop.R
 import com.student.drop.base.base_view.BVMActivity
+import com.student.drop.bean.MyPageState
 import com.student.drop.databinding.ActivityMainBinding
 import com.student.drop.ui.vm.MainVM
 import com.student.drop.util.MySPUtils
@@ -14,16 +15,11 @@ class MainActivity : BVMActivity<ActivityMainBinding, MainVM>() {
     override fun initListener() {
         super.initListener()
         mBinding.btnStart.setOnClickListener {
-            mVM.value.startRefresh(
-                mBinding.etCookies.text.toString(), mBinding.etCount.text.toString().toInt()
-            )
+            mVM.value.mRepo.mPageStateMLD.postValue(MyPageState(isDialogLoding = true))
+            mVM.value.processWork()
         }
     }
 
-    override fun initData() {
-        super.initData()
-        mBinding.etCookies.setText(MySPUtils.decodeString(MainVM.COOKE))
-    }
 
     //两秒内连续按2次退出
     var mExitTime: Long = 0
