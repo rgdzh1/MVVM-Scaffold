@@ -6,6 +6,7 @@ import com.student.drop.base.base_vm.BViewModel
 import com.student.drop.bean.MyPageState
 import com.student.drop.util.MySPUtils
 import kotlinx.coroutines.delay
+import org.apache.commons.lang3.RandomStringUtils
 import org.jsoup.Jsoup
 import java.net.CookieHandler
 import java.util.*
@@ -25,10 +26,10 @@ open class MainVM(val mRepo: MainRepo) : BViewModel(mRepo) {
             val mUrl = "https://engine.presearch.org/search?q=${mInfoMap[mIndex]}"
              LogUtils.e("Presearch 第 $mCount 次请求链接 $mUrl")
             val cookiesMap = HashMap<String, String>()
-            cookiesMap["Cookie"] ="""rid=eyJpdiI6ImRwZW9RcG9XYitaQ0NuK0xvRURTSVE9PSIsInZhbHVlIjoiblVEcERNd0FQbzJGVnR6eWVNWGdQZz09IiwibWFjIjoiZDVmNTgyYmM1NDNiNzBlNWU0NTlkMjA1N2UwNWYwZTdhMGZlOWUwMThjNTNhZTljY2JkY2IwYmRiNjNiMzMwNSJ9; __zlcmid=12QjmBN21N7pB8L; remember_web_59ba36addc2b2f9401580f014c7f58ea4e30989d=eyJpdiI6IlFQcDJWT05XbHRGQ09ZV2MwT1hBOXc9PSIsInZhbHVlIjoiSFM4OTR3OEZpREM3WFwvOVE3NndrSTVJenc4NFwvT3dOZGtlVWF2Wlc5QjBHVGRucTkzT2Z6OFlHYjFTXC9id1lnU0Zqb3RkRnh0NXdFdXYwRzlhQTRicFVDZlh5ZStDTG5pbFwvem5SR2dwMkZIZTlGR1wvbTEycnpuU3R1bVVrZWFQaTV3aTQ3Tnp2UisxNkl0ckRlMEtnQnprQWV3aTZ6QnUxT3R1ekNCQWZtd1c3bStCOVVoSXhuVFBuNlpYRldseHoiLCJtYWMiOiI2MzAzYTYyY2Y0OTA5OTE2OTlhYTZhMTljMGE5M2JkOTYwZTFkNmEwODUyZmYxM2FhMjJkNTQ4NGM4MzBmNTU2In0%3D; XSRF-TOKEN=eyJpdiI6InpVQWl6YmlLRHN6UTBnOEl5c3YwRXc9PSIsInZhbHVlIjoicktkRVlhT1VaRkR4WmRnNm05dkhaN1FYMjNOQW5TYjhBc1lkdHFUczRKV3QyZEtMRUZ0cVhvYjRoMVJMczhlNiIsIm1hYyI6ImFlODc5ZmUwNjIyMzJjMWU0YTkzNzM0ZWFhMWIyYjViMTk4OGQ5ZGNkNDVhNzUwYTg3NGM1OTUzOTQzZmU2NTkifQ%3D%3D; presearch_session=eyJpdiI6IjdJOGcwM2VYS1VmK0FMQzhQUndnVXc9PSIsInZhbHVlIjoiXC9XNnBmb29cL3lQc1lidjVVS0g3YUFmYk5WVDlQaU16R1NMZ3FQKzMyUWRGQU9yM1VnYkRnUnhBcWJwQVc4a2pFIiwibWFjIjoiMGE0NDVlODk2MWIwYTAyZGRhYWVjMmFiYjhhODZiNWJmMzY4MzlkZmFmNjlkZjg1YmI3NDhhMzQxOWE2M2E5MCJ9; token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2MTI2MDkwMTEsImV4cCI6MTYxMzIxMzgxMSwidXNlcl9pZCI6MjA3NTI1MSwidXNlcl9hcGlfa2V5IjoicDRqeUs4UXZYTlA0ZXFSQjRGanh3aFkxMWpqcWxnbWJRMkNUT1pINVFEMXNhWXFtQmZMZlExMjZBbmh6dDVZMHBZZGZLSDBvZVFtTjhtWm9XTUt4WEFRWVVBYXYyTksyQmFOOVg1cjBYU3dabE9ydjRxWmFxb2YxZjQzaGFsZWJZN3UyRjQ2QjIwT1AxaFBFRXAxSm5iIiwiYmV0YXMiOltdfQ.rJ6yA69eM36K25PPo8PzB02E3u4HUDimbAeUy2dq6uswL4ErDYvCFFP99zTa8E5rxUHh7jVh_Ey8oCmWgCy29TXv6XMUEUsuEJyJP-ronGNQ_PoyRO5otgXfGeTvwPcgctTZYNpN-uw6wwRclE8ye3lyrVpBAmXzIOYR-sKFWOERIpOiZal9_gCl7s-qP2pRFXrFaHG9eXLk6Rpm2CH9zim2a45rDGQY2G1HAZIC2mHxSKKuVjVH1MosyKH2ARsPn54Bp48jYIE8C29lEiIPruVqmVLK8sV_o7K8HJzALOauOkbz40eY-CuJopHoD01sldVYCPF6p1xfa4kcNtzeiQ"""
+            cookiesMap["Cookie"] ="rid=eyJpdiI6ImRwZW9RcG9XYitaQ0NuK0xvRURTSVE9PSIsInZhbHVlIjoiblVEcERNd0FQbzJGVnR6eWVNWGdQZz09IiwibWFjIjoiZDVmNTgyYmM1NDNiNzBlNWU0NTlkMjA1N2UwNWYwZTdhMGZlOWUwMThjNTNhZTljY2JkY2IwYmRiNjNiMzMwNSJ9; __zlcmid=12QjmBN21N7pB8L; dismissed-search-ext=true; remember_web_59ba36addc2b2f9401580f014c7f58ea4e30989d=eyJpdiI6IlFQcDJWT05XbHRGQ09ZV2MwT1hBOXc9PSIsInZhbHVlIjoiSFM4OTR3OEZpREM3WFwvOVE3NndrSTVJenc4NFwvT3dOZGtlVWF2Wlc5QjBHVGRucTkzT2Z6OFlHYjFTXC9id1lnU0Zqb3RkRnh0NXdFdXYwRzlhQTRicFVDZlh5ZStDTG5pbFwvem5SR2dwMkZIZTlGR1wvbTEycnpuU3R1bVVrZWFQaTV3aTQ3Tnp2UisxNkl0ckRlMEtnQnprQWV3aTZ6QnUxT3R1ekNCQWZtd1c3bStCOVVoSXhuVFBuNlpYRldseHoiLCJtYWMiOiI2MzAzYTYyY2Y0OTA5OTE2OTlhYTZhMTljMGE5M2JkOTYwZTFkNmEwODUyZmYxM2FhMjJkNTQ4NGM4MzBmNTU2In0%3D; XSRF-TOKEN=eyJpdiI6Im5uMkY4QUJBN2lOcW1KWlpoaUJmWnc9PSIsInZhbHVlIjoiSndsdldwejVaUk1IbVUrdlRlS0d3amxtTXVWazlpTGVqaU9iVzhGT2VtdG53R3kxcUlcL2gxa0hWbDJMTCtJQ1YiLCJtYWMiOiJmNjRiOWVlNmE4YWI3NzllZmZlZTNkMTJjMjg2MTU0NmJmMWZmNTRhZDM1NDUwYmVkMjA2MzBlNjVjZjM3MmI3In0%3D; presearch_session=eyJpdiI6Ino2cVMxWnJwTENXempWU3lWakF5Q2c9PSIsInZhbHVlIjoibks0d1I0U0RnTW4rcFwvcU82dFRkTnVrMUpkcTRmaUxtWkcydW5pOWUwRCtWZk9kTnZ6WmZnZVRiZGRDNWhvTjQiLCJtYWMiOiIwMjg3MGU0OTA5ZDVjMDczODc0NTVjYWM2M2IyNDA5ZDg4ODNlMWViYjA5OGE2NmI1NzE1MThiNWYzMTA3M2NjIn0%3D"
             var document = Jsoup.connect(mUrl).cookies(cookiesMap).get()
             // LogUtils.e("第 $count 次请求结果", document)
-            delay(20000)
+            delay(3000)
             mCount--
             if (mCount < 0) {
                 // LogUtils.e("Presearch 退出")
