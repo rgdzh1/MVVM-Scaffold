@@ -3,7 +3,7 @@ package com.student.drop.api
 import com.blankj.utilcode.util.LogUtils
 import com.google.gson.GsonBuilder
 import com.student.drop.BuildConfig
-import com.student.drop.util.EZLoanSPUtils
+import com.student.drop.util.MySPUtils
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
@@ -32,7 +32,7 @@ abstract class BRetrofitClient {
                     // 添加公共参数
                     val original: Request = it.request()
                     val request = original.newBuilder()
-                        .header("token", EZLoanSPUtils.decodeString(MYKEY.TOKEN))
+                        .header("token", MySPUtils.decodeString(MYKEY.TOKEN))
                         .build()
                     it.proceed(request)
                 }

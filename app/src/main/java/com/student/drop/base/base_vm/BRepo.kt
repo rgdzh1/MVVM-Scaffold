@@ -9,14 +9,14 @@ import com.student.drop.R
 import com.student.drop.VCashApp
 import com.student.drop.bean.BResponse
 
-import com.student.drop.bean.VCashPageState
+import com.student.drop.bean.MyPageState
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 
 
 open class BRepo {
     // 状态页控制对象
-    val mPageStateMLD = MutableLiveData(VCashPageState(isPageLoding = true))
+    val mPageStateMLD = MutableLiveData(MyPageState(isPageLoding = true))
 
     /**
      * 安全调用,可以捕获协程中的异常
@@ -40,10 +40,10 @@ open class BRepo {
     ): BResponse<E> {
         if (isPageLoding) {
             // 页面加载等待
-            mPageStateMLD.postValue(VCashPageState(isPageLoding = true))
+            mPageStateMLD.postValue(MyPageState(isPageLoding = true))
         } else {
             // 弹窗加载等待
-            mPageStateMLD.postValue(VCashPageState(isDialogLoding = true))
+            mPageStateMLD.postValue(MyPageState(isDialogLoding = true))
         }
         return try {
             call()
@@ -73,7 +73,7 @@ open class BRepo {
         if (response.mException == null) {
             // 处理数据获取成功后的界面
             if (handleDataSuccess) {
-                mPageStateMLD.postValue(VCashPageState(isSuccess = true))
+                mPageStateMLD.postValue(MyPageState(isSuccess = true))
             }
             // 数据获取成功的回调
             response.data?.apply {
@@ -93,28 +93,28 @@ open class BRepo {
             when (response.mException) {
                 is ConnectException -> {
                     // 连接失败
-                    if (handleDataErr) mPageStateMLD.postValue(VCashPageState(isNetErr = true))
+                    if (handleDataErr) mPageStateMLD.postValue(MyPageState(isNetErr = true))
                     ToastUtils.showLong(VCashApp.CONTEXT.getString(R.string.network_connection_failed))
                 }
                 is SocketTimeoutException -> {
                     // 请求超时
-                    if (handleDataErr) mPageStateMLD.postValue(VCashPageState(isNetErr = true))
+                    if (handleDataErr) mPageStateMLD.postValue(MyPageState(isNetErr = true))
                     ToastUtils.showLong(VCashApp.CONTEXT.getString(R.string.network_request_timeout))
                 }
                 is JsonParseException -> {
                     // 数据解析错误
-                    if (handleDataErr) mPageStateMLD.postValue(VCashPageState(isDataErr = true))
+                    if (handleDataErr) mPageStateMLD.postValue(MyPageState(isDataErr = true))
                     ToastUtils.showLong(VCashApp.CONTEXT.getString(R.string.api_data_parse_error))
                 }
                 else -> {
                     // 未知错误
-                    if (handleDataErr) mPageStateMLD.postValue(VCashPageState(isDataErr = true))
+                    if (handleDataErr) mPageStateMLD.postValue(MyPageState(isDataErr = true))
                     ToastUtils.showLong(response.mException.message)
                 }
             }
             // 数据获取错误的回调
             dataErrorBlock()
-            mPageStateMLD.postValue(VCashPageState(isDialogLoding = false))
+            mPageStateMLD.postValue(MyPageState(isDialogLoding = false))
         }
     }
 }

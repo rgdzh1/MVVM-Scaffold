@@ -6,7 +6,7 @@ package com.student.drop.bean
  * isSuccess: 数据加载成功
  * isNetErr: 数据加载失败
  */
-class VCashPageState(
+class MyPageState(
     var isPageLoding: Boolean = false,
     var isDialogLoding: Boolean = false,
     var isSuccess: Boolean = false,
