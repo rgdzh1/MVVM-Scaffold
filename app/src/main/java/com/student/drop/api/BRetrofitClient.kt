@@ -13,7 +13,9 @@ import java.util.concurrent.TimeUnit
 
 
 abstract class BRetrofitClient {
-    private var mLog = HttpLoggingInterceptor { message ->
+
+
+    private var mLog = HttpLoggingInterceptor { message: String ->
         if (BuildConfig.DEBUG) {
             LogUtils.e("VCash 日志", message)
         }

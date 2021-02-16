@@ -1,2 +1,2 @@
-include ':app'
+include ':app', ':wallet-eth'
 rootProject.name = "MVVM-Scaffold"

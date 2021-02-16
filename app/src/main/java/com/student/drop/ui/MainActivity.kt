@@ -1,12 +1,11 @@
 package com.student.drop.ui
 
 import com.blankj.utilcode.util.ToastUtils
+import com.develop.wallet.eth.WalletManager
 import com.student.drop.R
 import com.student.drop.base.base_view.BVMActivity
-import com.student.drop.bean.MyPageState
 import com.student.drop.databinding.ActivityMainBinding
 import com.student.drop.ui.vm.MainVM
-import com.student.drop.util.MySPUtils
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : BVMActivity<ActivityMainBinding, MainVM>() {
@@ -14,9 +13,19 @@ class MainActivity : BVMActivity<ActivityMainBinding, MainVM>() {
     override fun layoutId(): Int = R.layout.activity_main
     override fun initListener() {
         super.initListener()
-        mBinding.btnStart.setOnClickListener {
-            mVM.value.mRepo.mPageStateMLD.postValue(MyPageState(isDialogLoding = true))
-            mVM.value.processWork()
+        mBinding.btnCheck.setOnClickListener {
+            mVM.value.checkAddressInfo(
+                "0xb47998cea1cbe1a17b105950ba6932794ffc9ba7",
+                "0xb47998cea1cbe1a17b105950ba6932794ffc9ba7"
+            )
+        }
+        mBinding.btnTranMnem.setOnClickListener {
+            mVM.value.sendTransactionByMnemonic(
+                "0x6b2bd478dfce5fa35f7ebb7b0152d295d75627f9",
+                "apology kangaroo acid primary country rival ankle plastic bag agree section only pumpkin fly popular session shift silly toward desk cactus rug grass figure",
+                "0x3f8a2946ed7E7d911ceb0bF668060aaC2F9c6168",
+                "1"
+            )
         }
     }
 

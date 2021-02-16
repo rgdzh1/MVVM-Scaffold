@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PRE Token</string>
+    <string name="app_name">ETH转账</string>
     <string name="network_connection_failed">链接失败</string>
     <string name="network_request_timeout">请求超时</string>
     <string name="api_data_parse_error">数据解析错误</string>

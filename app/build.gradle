@@ -9,7 +9,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.aibox.lxx"
+        applicationId "com.aibox.ethwallet"
         minSdkVersion 19
         targetSdkVersion 30
         versionCode 1
@@ -71,6 +71,7 @@ android {
 }
 
 dependencies {
+
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -132,4 +133,7 @@ dependencies {
     implementation 'org.jsoup:jsoup:1.13.1'
     // 24位随机数
     implementation 'org.apache.commons:commons-text:1.9'
+
+    // 依赖钱包
+    implementation project(path: ':wallet-eth')
 }
