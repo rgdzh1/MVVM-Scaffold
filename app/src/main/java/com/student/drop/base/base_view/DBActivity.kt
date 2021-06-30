@@ -26,18 +26,20 @@ abstract class DBActivity<T : ViewDataBinding> : AppCompatActivity() {
             .build()
     }
 
+    // 是否执行set类方法, 不执行将由BVMActivity类执行
+    var isProcess = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // 加载布局
         mBinding = DataBindingUtil.setContentView(this, layoutId())
         mBinding.lifecycleOwner = this@DBActivity
-        // 状态栏颜色
-//        StatusBarUtil.setColor(this, Color.BLACK)
-        startObserve()
-        initView()
-        initListener()
-        initData()
-
+        if (isProcess) {
+            startObserve()
+            initView()
+            initListener()
+            initData()
+        }
     }
 
     /**

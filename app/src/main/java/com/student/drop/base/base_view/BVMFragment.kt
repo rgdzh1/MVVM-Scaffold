@@ -18,8 +18,7 @@ abstract class BVMFragment<T : ViewDataBinding, E : BViewModel> : DBFragment<T>(
         }
     }
 
-    // 当前界面的ViewModule
-    val mVM: Lazy<E> = getVM()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,17 +29,25 @@ abstract class BVMFragment<T : ViewDataBinding, E : BViewModel> : DBFragment<T>(
         return mLoadSir.value.loadLayout
     }
 
+    // 当前界面的ViewModule
+    lateinit var mVM: E
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.isProcess = false
         super.onViewCreated(view, savedInstanceState)
+        mVM = getVM().value
         // 加载界面监听
         lifecycle.addObserver(
             PageStateLifecycleObserver(
-                mVM.value,
+                mVM,
                 mLoadSir.value,
                 this.activity!!
             )
         )
+        startObserve()
+        initView()
+        initListener()
+        initData()
     }
 
     var isFirstLoad = true

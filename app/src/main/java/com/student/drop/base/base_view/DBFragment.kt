@@ -39,13 +39,16 @@ abstract class DBFragment<T : ViewDataBinding> : Fragment() {
         mBinding.lifecycleOwner = this@DBFragment
         return mBinding.root
     }
-
+    // 是否执行set类方法, 不执行将由BVMActivity类执行
+    var isProcess = true
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        startObserve()
-        initView()
-        initListener()
-        initData()
+        if (isProcess) {
+            startObserve()
+            initView()
+            initListener()
+            initData()
+        }
     }
 
 

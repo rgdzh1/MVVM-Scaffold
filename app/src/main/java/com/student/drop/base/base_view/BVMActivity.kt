@@ -18,12 +18,18 @@ abstract class BVMActivity<T : ViewDataBinding, E : BViewModel> : DBActivity<T>(
     }
 
     // 当前界面的ViewModule
-    val mVM = getVM()
+    lateinit var mVM: E
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        super.isProcess = false
         super.onCreate(savedInstanceState)
+        mVM = getVM().value
         // 加载界面监听
-        lifecycle.addObserver(PageStateLifecycleObserver(mVM.value, mLoadSir.value, this))
+        lifecycle.addObserver(PageStateLifecycleObserver(mVM, mLoadSir.value, this))
+        startObserve()
+        initView()
+        initListener()
+        initData()
     }
 
     /**
