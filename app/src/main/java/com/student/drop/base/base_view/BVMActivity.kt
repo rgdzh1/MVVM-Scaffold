@@ -20,12 +20,21 @@ abstract class BVMActivity<T : ViewDataBinding, E : BViewModel> : DBActivity<T>(
     // 当前界面的ViewModule
     lateinit var mVM: E
 
+    // 页面监听者
+    private val mPageStateLifecycleObserver = lazy {
+        PageStateLifecycleObserver(
+            mVM,
+            mLoadSir.value,
+            this
+        )
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.isProcess = false
         super.onCreate(savedInstanceState)
         mVM = getVM().value
         // 加载界面监听
-        lifecycle.addObserver(PageStateLifecycleObserver(mVM, mLoadSir.value, this))
+        lifecycle.addObserver(mPageStateLifecycleObserver.value)
         startObserve()
         initView()
         initListener()

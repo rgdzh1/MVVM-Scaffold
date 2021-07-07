@@ -55,10 +55,16 @@ class PageStateLifecycleObserver(
         setPageListener(mViewModel)
     }
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    fun onDestroy(owner: LifecycleOwner?) {
+        // 防止内存泄漏
+        mViewModel.mBRepo.mPageStateMLD.removeObservers(mContext as LifecycleOwner)
+    }
+
     /**
      * 监听当前界面状态
      */
-    fun setPageListener(mVM: BViewModel) {
+    private fun setPageListener(mVM: BViewModel) {
         mVM.mBRepo.mPageStateMLD.observe(mContext as LifecycleOwner) { vCashPageState -> // 圆形进度条
             if (vCashPageState.mShowProgressInfo.isShow) {
                 mLoadingProgressDULy.value.dailog.show()

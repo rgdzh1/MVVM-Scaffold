@@ -18,7 +18,14 @@ abstract class BVMFragment<T : ViewDataBinding, E : BViewModel> : DBFragment<T>(
         }
     }
 
-
+    // 页面监听者
+    private val mPageStateLifecycleObserver = lazy {
+        PageStateLifecycleObserver(
+            mVM,
+            mLoadSir.value,
+            this.context!!
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,13 +44,7 @@ abstract class BVMFragment<T : ViewDataBinding, E : BViewModel> : DBFragment<T>(
         super.onViewCreated(view, savedInstanceState)
         mVM = getVM().value
         // 加载界面监听
-        lifecycle.addObserver(
-            PageStateLifecycleObserver(
-                mVM,
-                mLoadSir.value,
-                this.activity!!
-            )
-        )
+        lifecycle.addObserver(mPageStateLifecycleObserver.value)
         startObserve()
         initView()
         initListener()
